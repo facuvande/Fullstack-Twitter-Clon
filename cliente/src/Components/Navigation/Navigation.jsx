@@ -1,7 +1,11 @@
 import React from 'react'
 import { navigationMenu } from './NavigationMenu.jsx'
+import { useNavigate } from 'react-router-dom'
 
 export const Navigation = () => {
+
+    const navigate = useNavigate();
+
     return (
         <div className='h-screen sticky top-0'>
             <div>
@@ -10,7 +14,7 @@ export const Navigation = () => {
                 </div>
                 <div className="space-y-6">
                     {
-                        navigationMenu.map((item) => (<div className='cursor-pointer flex space-x-3 items-center'>
+                        navigationMenu.map((item) => (<div className='cursor-pointer flex space-x-3 items-center' onClick={() => item.title === "Perfil" ? navigate(`/perfil/${5}`) : navigate(item.path)}>
                             {item.icon}
                             <p className='text-xl'>{item.title}</p>
                         </div>))
