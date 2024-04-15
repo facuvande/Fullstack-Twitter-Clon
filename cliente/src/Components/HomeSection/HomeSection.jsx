@@ -6,6 +6,7 @@ import ImageIcon from '@mui/icons-material/Image'
 import FmdGoodIcon from '@mui/icons-material/FmdGood'
 import TagFacesIcon from '@mui/icons-material/TagFaces'
 import { useState } from 'react'
+import { TweetCard } from './TweetCard'
 
 const validationSchema = Yup.object().shape({
     content: Yup.string().required('Tweet text is required'),
@@ -73,6 +74,9 @@ export const HomeSection = () => {
                         </form>
                     </div>
                 </div>
+            </section>
+            <section className=''>
+                {[1,1,1,1,1].map((item) => <TweetCard/>)}
             </section>
         </div>
     )
