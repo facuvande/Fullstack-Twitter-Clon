@@ -1,6 +1,7 @@
 import React from 'react'
 import { navigationMenu } from './NavigationMenu.jsx'
 import { useNavigate } from 'react-router-dom'
+import { Button } from '@mui/material';
 
 export const Navigation = () => {
 
@@ -19,6 +20,11 @@ export const Navigation = () => {
                             <p className='text-xl'>{item.title}</p>
                         </div>))
                     }
+                </div>
+                <div className='py-10'>
+                    <Button sx={{width:"100%", borderRadius: "29px", py: "15px", bgcolor: "#1e88e5"}} variant="contained">
+                        Tweet
+                    </Button>
                 </div>
             </div>
 
