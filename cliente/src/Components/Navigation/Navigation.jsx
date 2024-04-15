@@ -1,9 +1,24 @@
 import React from 'react'
 import { navigationMenu } from './NavigationMenu.jsx'
 import { useNavigate } from 'react-router-dom'
-import { Button } from '@mui/material';
+import { Avatar, Button, Menu, MenuItem } from '@mui/material';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 export const Navigation = () => {
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const handleLogout = () => {
+        console.log('se cerro la sesion');
+        handleClose();
+    }
 
     const navigate = useNavigate();
 
@@ -27,7 +42,35 @@ export const Navigation = () => {
                     </Button>
                 </div>
             </div>
-
+            <div className='flex items-center justify-between'>
+                <div className="flex items-center space-x-3">
+                    <Avatar alt="nombre de usuario" src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_960_720.png" />
+                    <div>
+                        <span>Facundo Vandecaveye</span>
+                        <span className='opacity-70'>@VandeFacu</span>
+                    </div>
+                    <Button
+                        id="basic-button"
+                        aria-controls={open ? 'basic-menu' : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={open ? 'true' : undefined}
+                        onClick={handleClick}
+                    >
+                        <MoreHorizIcon/>
+                    </Button>
+                    <Menu
+                        id="basic-menu"
+                        anchorEl={anchorEl}
+                        open={open}
+                        onClose={handleClose}
+                        MenuListProps={{
+                        'aria-labelledby': 'basic-button',
+                        }}
+                    >
+                        <MenuItem onClick={handleLogout}>Cerrar Sesion</MenuItem>
+                    </Menu>
+                </div>
+            </div>
         </div>
     )
 }
