@@ -1,13 +1,21 @@
 import React from 'react'
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { useNavigate } from 'react-router-dom';
-import { Avatar, Button } from '@mui/material';
+import { Avatar, Button  } from '@mui/material';
+import Box from '@mui/material/Box';
+import Tab from '@mui/material/Tab';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import { useState } from 'react';
+import { TweetCard } from '../HomeSection/TweetCard';
 
 export const Profile = () => {
 
+    const [tabValue, setTabValue] = useState("1")
     const navigate = useNavigate();
     const handleBack = () => navigate(-1);
 
@@ -17,6 +25,22 @@ export const Profile = () => {
 
     const handleFollowUser = () => {
         console.log("Seguir usuario")
+    }
+
+    const handleTabChange = (event, newValue) => {
+        setTabValue(newValue);
+        if(newValue === 4){
+            console.log("likes tweets")
+        }
+        else if(newValue === 1){
+            console.log("users tweets")
+        }
+        else if(newValue === 2){
+            console.log("users retweets")
+        }
+        else if(newValue === 3){
+            console.log("users replies")
+        }
     }
 
     return (
@@ -75,6 +99,27 @@ export const Profile = () => {
                         </div>
                     </div>
                 </div>
+            </section>
+
+            <section className='py-5'>
+                <Box sx={{ width: '100%', typography: 'body1' }}>
+                    <TabContext value={tabValue}>
+                        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                        <TabList onChange={handleTabChange} aria-label="lab API tabs example">
+                            <Tab label="Tweets" value="1" />
+                            <Tab label="Retweets" value="2" />
+                            <Tab label="Multimedia" value="3" />
+                            <Tab label="Likes" value="4" />
+                        </TabList>
+                        </Box>
+                        <TabPanel value="1">{
+                            [1,1,1,1].map((item) => <TweetCard/>)
+                        }</TabPanel>
+                        <TabPanel value="2">Retweets</TabPanel>
+                        <TabPanel value="3">Multimedia</TabPanel>
+                        <TabPanel value="4">Likes</TabPanel>
+                    </TabContext>
+                </Box>
             </section>
         </div>
     )
