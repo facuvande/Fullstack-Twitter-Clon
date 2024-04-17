@@ -12,6 +12,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { useState } from 'react';
 import { TweetCard } from '../HomeSection/TweetCard';
+import { ProfileModal } from './ProfileModal';
 
 export const Profile = () => {
 
@@ -19,9 +20,11 @@ export const Profile = () => {
     const navigate = useNavigate();
     const handleBack = () => navigate(-1);
 
-    const handleOpenProfileModel = () => {
-        console.log('abrir modal de perfil')
-    }
+    const [openProfileModal, setOpenProfileModal] = useState(false);
+
+    const handleOpenProfileModal = () => setOpenProfileModal(true);
+    const handleClose = () => setOpenProfileModal(false);
+
 
     const handleFollowUser = () => {
         console.log("Seguir usuario")
@@ -45,7 +48,7 @@ export const Profile = () => {
 
     return (
         <div>
-            <section className={`z-50 flex items-center sticky top-0 bg-opacity-95`}>
+            <section className={`bg-white z-50 flex items-center sticky top-0 bg-opacity-95`}>
                 <KeyboardBackspaceIcon className='cursor-pointer' onClick={handleBack}/>
 
                 <h1 className='py-5 text-xl font-bold opacity-90 ml-5'>Facundo Vandecaveye</h1>
@@ -57,7 +60,7 @@ export const Profile = () => {
                 <div className='flex justify-between items-start mt-5 h-[5rem]'>
                     <Avatar className='transform -translate-y-24' sx={{width: "10rem", height: "10rem", border: "4px solid white" }} alt='Avatar de usuario' src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_960_720.png"/>
                     {
-                        true ? <Button onClick={handleOpenProfileModel} variant='contained' sx={{borderRadius: "20px"}}>Editar Perfil</Button> : <Button onClick={handleFollowUser} variant='contained' sx={{borderRadius: "20px"}}>{true ? "Seguir" : "Dejar de seguir"}</Button>
+                        true ? <Button onClick={handleOpenProfileModal} variant='contained' sx={{borderRadius: "20px"}}>Editar Perfil</Button> : <Button onClick={handleFollowUser} variant='contained' sx={{borderRadius: "20px"}}>{true ? "Seguir" : "Dejar de seguir"}</Button>
                     }
                 </div>
                 <div>
@@ -120,6 +123,10 @@ export const Profile = () => {
                         <TabPanel value="4">Likes</TabPanel>
                     </TabContext>
                 </Box>
+            </section>
+
+            <section>
+                <ProfileModal handleClose={handleClose} open={openProfileModal}/>
             </section>
         </div>
     )

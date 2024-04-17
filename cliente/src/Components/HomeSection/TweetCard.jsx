@@ -82,7 +82,7 @@ export const TweetCard = () => {
                     </div>
 
                     <div className='mt-2'>
-                        <div className='cursor-pointer'>
+                        <div onClick={() => navigate(`/tweet/${3}`)} className='cursor-pointer'>
                             <p className='mb-2 p-0'>twitter clon - full stack proyecto con react y springboot</p>
                             <img className='w-[28rem] border border-gray-400 p-5 rounded-md' src='https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_960_720.png' alt='Imagen del usuario'/>
                         </div>
