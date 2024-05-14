@@ -3,8 +3,13 @@ import SearchIcon from '@mui/icons-material/Search';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import { Button } from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import SubscriptionModal from '../SubscriptionModal/SubscriptionModal';
 
 export const Right = () => {
+
+    const [openSubscriptionModal, setOpenSubscriptionModal] = React.useState(false);
+    const handleOpenSubscriptionModal = () => setOpenSubscriptionModal(true);
+    const handleCloseSubscriptionModal = () => setOpenSubscriptionModal(false);
 
     const handleChangeTheme = () => {
         console.log("Cambio de tema")
@@ -23,7 +28,7 @@ export const Right = () => {
             <section className='my-5'>
                 <h1 className='text-xl font-bold'>Obtiene el Verificado</h1>
                 <h1 className='font-bold my-2'>Suscribite para obtener nuevas opciones</h1>
-                <Button variant='contained' sx={{padding: "10px", paddingX: "20px", borderRadius: "25px"}}>
+                <Button variant='contained' sx={{padding: "10px", paddingX: "20px", borderRadius: "25px"}} onClick={handleOpenSubscriptionModal}>
                     Obtiene el Verificado
                 </Button>
             </section>
@@ -44,6 +49,9 @@ export const Right = () => {
                         <MoreHorizIcon/>
                 </div>
                 ))}
+            </section>
+            <section>
+                <SubscriptionModal open={openSubscriptionModal} handleClose={handleCloseSubscriptionModal}/>
             </section>
         </div>
 
